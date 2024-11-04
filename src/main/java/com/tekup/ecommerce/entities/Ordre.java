@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,5 +22,16 @@ public class Ordre {
     private Integer totalAmount;
     @Column(name = "ordre_date")
     private Date ordreDate;
+
+    @ManyToMany(mappedBy = "ordre", cascade = CascadeType.ALL)
+    private Set<Product> products;
+
+    @ManyToOne
+    User user;
+
+    @OneToOne(mappedBy = "ordre", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
 
 }

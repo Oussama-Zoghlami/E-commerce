@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,5 +20,18 @@ public class Category {
     private Integer idCategory;
     @Column(name = "category_name")
     private String nameCategory;
+
+
+    // Self-referencing relationship: Many subcategories can belong to one parent
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
+
+    // Self-referencing relationship: One category can have multiple subcategories
+    @OneToMany(mappedBy = "parentCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Category> subCategories = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private Set<Product> products = new HashSet<>();
 
 }

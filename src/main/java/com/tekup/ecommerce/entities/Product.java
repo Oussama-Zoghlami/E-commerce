@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,6 +25,18 @@ public class Product {
     private String description;
     @Column(name = "product_quantity")
     private Integer quantity;
+
+
+    @ManyToOne
+    Category category;
+
+    @ManyToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<Ordre> ordres;
+
+    @ManyToOne
+    User user;
+
+
 
 
 

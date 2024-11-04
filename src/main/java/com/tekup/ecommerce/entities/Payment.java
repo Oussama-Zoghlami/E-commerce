@@ -21,4 +21,7 @@ public class Payment {
     private Status status;
     @Enumerated(EnumType.STRING)
     private Method method;
+
+    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+    private Ordre ordre;
 }
