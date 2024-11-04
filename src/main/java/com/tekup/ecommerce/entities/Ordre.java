@@ -23,14 +23,21 @@ public class Ordre {
     @Column(name = "ordre_date")
     private Date ordreDate;
 
-    @ManyToMany(mappedBy = "ordre", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "product_ordre",
+            joinColumns = @JoinColumn(name = "ordre_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> products;
 
     @ManyToOne
-    User user;
+    @JoinColumn(name = "user_id") // Define foreign key column for user
+    private User user;
 
     @OneToOne(mappedBy = "ordre", cascade = CascadeType.ALL)
     private Payment payment;
+
 
 
 

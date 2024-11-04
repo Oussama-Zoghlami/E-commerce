@@ -28,13 +28,20 @@ public class Product {
 
 
     @ManyToOne
-    Category category;
+    @JoinColumn(name = "category_id") // Define foreign key column for category
+    private Category category;
 
-    @ManyToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @ManyToMany // Correct mapping
+    @JoinTable(
+            name = "product_ordre",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "ordre_id")
+    )
     private Set<Ordre> ordres;
 
     @ManyToOne
-    User user;
+    @JoinColumn(name = "user_id") // Define foreign key column for user
+    private User user;
 
 
 

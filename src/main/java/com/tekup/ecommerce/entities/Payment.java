@@ -22,6 +22,7 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private Method method;
 
-    @OneToOne(mappedBy = "payment", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "ordre_id") // Foreign key for Ordre
     private Ordre ordre;
 }
